@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class SprtsPage extends StatelessWidget {
-  const SprtsPage({super.key});
+class SportsPage extends StatelessWidget {
+  const SportsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
