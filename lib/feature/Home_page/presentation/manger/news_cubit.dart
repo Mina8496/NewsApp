@@ -32,7 +32,7 @@ class NewsCubit extends Cubit<NewsState> {
     currentIndex = index;
     emit(NewsButtonNavBarState());
   }
-
+// business
   List<dynamic> business = [];
 
   void getBusiness() {
@@ -58,4 +58,60 @@ class NewsCubit extends Cubit<NewsState> {
           emit(NewsGetBussinesErrorState(error.toString()));
         });
   }
+
+//sports
+  List<dynamic> sports = [];
+
+  void getsports() {
+    emit(NewsGetBusinessLoadingState());
+    DioHelper.getData(
+          url: "v2/top-headlines",
+          query: {
+            'country': 'us',
+            'category': 'sports',
+            'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
+
+            //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
+          },
+        )
+        .then((value) {
+          // print(value.data["articles"][0]['title']);
+          sports = value.data["articles"];
+          print(sports[0]['title']);
+          emit(NewsGetSportsSuccesState());
+        })
+        .catchError((error) {
+          print(error.toString());
+          emit(NewsGetSportsErrorState(error.toString()));
+        });
+  }
+
+  // Science
+    List<dynamic> science = [];
+
+  void getScience() {
+    emit(NewsGetScienceLoadingState());
+    DioHelper.getData(
+          url: "v2/top-headlines",
+          query: {
+            'country': 'us',
+            'category': 'science',
+            'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
+
+            //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
+          },
+        )
+        .then((value) {
+          // print(value.data["articles"][0]['title']);
+          science = value.data["articles"];
+          print(science[0]['title']);
+          emit(NewsGetScienceSuccesState());
+        })
+        .catchError((error) {
+          print(error.toString());
+          emit(NewsGetScienceErrorState(error.toString()));
+        });
+  }
+
+
 }
