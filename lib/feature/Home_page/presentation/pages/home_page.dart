@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
       create: (context) => NewsCubit()..getBusiness(),
       child: BlocConsumer<NewsCubit, NewsState>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
           var cubit = NewsCubit.get(context);

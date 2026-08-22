@@ -4,6 +4,7 @@ import 'package:news_app/core/network/remote/dio_helper.dart';
 import 'package:news_app/feature/Home_page/presentation/pages/home_page.dart';
 
 void main() {
+  // Bloc = MyBlocObserver();
   DioHelper.init();
   runApp(const MyApp());
 }

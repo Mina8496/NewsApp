@@ -12,18 +12,17 @@ class SportsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NewsCubit, NewsState>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
-        List sports = NewsCubit.get(context).sports;
+        List list = NewsCubit.get(context).sports;
         return ConditionalBuilder(
-          condition: state is! NewsGetSportsLoadingState,
+          condition: list.length > 0,
           builder: (context) => ListView.separated(
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) =>
-                BuildArticleItem(articles: sports[index]),
+                BuildArticleItem(articles: list[index]),
             separatorBuilder: (context, index) => const Divider(height: 1),
-            itemCount: sports.length,
+            itemCount: list.length,
           ),
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );

@@ -15,15 +15,15 @@ class Businesspage extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        List bussines = NewsCubit.get(context).business;
+        List list = NewsCubit.get(context).business;
         return ConditionalBuilder(
           condition: state is! NewsGetBusinessLoadingState,
           builder: (context) => ListView.separated(
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) =>
-                BuildArticleItem(articles: bussines[index]),
+                BuildArticleItem(articles: list[index]),
             separatorBuilder: (context, index) => const Divider(height: 1),
-            itemCount: bussines.length,
+            itemCount: list.length,
           ),
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );

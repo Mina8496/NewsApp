@@ -30,9 +30,12 @@ class NewsCubit extends Cubit<NewsState> {
 
   void changeBottomNavBar(int index) {
     currentIndex = index;
+    if (index == 1) getsports();
     emit(NewsButtonNavBarState());
+    if (index == 2) getScience();
   }
-// business
+
+  // business
   List<dynamic> business = [];
 
   void getBusiness() {
@@ -59,7 +62,7 @@ class NewsCubit extends Cubit<NewsState> {
         });
   }
 
-//sports
+  //sports
   List<dynamic> sports = [];
 
   void getsports() {
@@ -87,7 +90,7 @@ class NewsCubit extends Cubit<NewsState> {
   }
 
   // Science
-    List<dynamic> science = [];
+  List<dynamic> science = [];
 
   void getScience() {
     emit(NewsGetScienceLoadingState());
@@ -112,6 +115,4 @@ class NewsCubit extends Cubit<NewsState> {
           emit(NewsGetScienceErrorState(error.toString()));
         });
   }
-
-
 }

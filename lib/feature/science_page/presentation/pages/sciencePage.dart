@@ -15,15 +15,15 @@ class Sciencepage extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        List science = NewsCubit.get(context).science;
+        List list = NewsCubit.get(context).science;
         return ConditionalBuilder(
-          condition: state is! NewsGetScienceLoadingState,
+          condition: list.length > 0,
           builder: (context) => ListView.separated(
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) =>
-                BuildArticleItem(articles: science[index]),
+                BuildArticleItem(articles: list[index]),
             separatorBuilder: (context, index) => const Divider(height: 1),
-            itemCount: science.length,
+            itemCount: list.length,
           ),
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );
