@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/core/network/remote/dio_helper.dart';
 import 'package:news_app/feature/Business_page/presentation/pages/BusinessPage.dart';
 import 'package:news_app/feature/Home_page/presentation/manger/news_state.dart';
 import 'package:news_app/feature/science_page/presentation/pages/sciencePage.dart';
@@ -30,5 +31,31 @@ class NewsCubit extends Cubit<NewsState> {
   void changeBottomNavBar(int index) {
     currentIndex = index;
     emit(NewsButtonNavBarState());
+  }
+
+  List<dynamic> business = [];
+
+  void getBusiness() {
+    emit(NewsGetBusinessLoadingState());
+    DioHelper.getData(
+          url: "v2/top-headlines",
+          query: {
+            'country': 'us',
+            'category': 'business',
+            'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
+
+            //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
+          },
+        )
+        .then((value) {
+          // print(value.data["articles"][0]['title']);
+          business = value.data["articles"];
+          print(business[0]['title']);
+          emit(NewsGetBussinesSuccesState());
+        })
+        .catchError((error) {
+          print(error.toString());
+          emit(NewsGetBussinesErrorState(error.toString()));
+        });
   }
 }

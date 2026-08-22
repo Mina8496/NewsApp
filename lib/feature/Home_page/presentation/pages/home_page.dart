@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewsCubit(),
+      create: (context) => NewsCubit()..getBusiness(),
       child: BlocConsumer<NewsCubit, NewsState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -26,6 +26,12 @@ class HomePage extends StatelessWidget {
               currentIndex: cubit.currentIndex,
               items: cubit.bottomItems,
               onTap: (value) => cubit.changeBottomNavBar(value),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+               
+              },
+              child: Icon(Icons.add),
             ),
             body: cubit.screens[cubit.currentIndex],
           );
