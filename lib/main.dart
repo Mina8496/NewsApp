@@ -1,10 +1,12 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/core/network/remote/dio_helper.dart';
-import 'package:news_app/feature/Home_page/presentation/pages/home_page.dart';
+import 'package:news_app/feature/Home_page/presentation/manger/MyBlocObserver.dart';
+import 'package:news_app/feature/Home_page/presentation/view/home_page.dart';
 
 void main() {
-  // Bloc = MyBlocObserver();
+   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   runApp(const MyApp());
 }

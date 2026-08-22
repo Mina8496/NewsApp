@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/network/remote/dio_helper.dart';
-import 'package:news_app/feature/Business_page/presentation/pages/BusinessPage.dart';
+import 'package:news_app/feature/Business_page/presentation/view/BusinessPage.dart';
 import 'package:news_app/feature/Home_page/presentation/manger/news_state.dart';
 import 'package:news_app/feature/science_page/presentation/pages/sciencePage.dart';
 import 'package:news_app/feature/settings_page/presentation/pages/settings_page.dart';
-import 'package:news_app/feature/sports_page/presentation/pages/sports_page.dart';
+import 'package:news_app/feature/sports_page/presentation/view/sports_page.dart';
 
 class NewsCubit extends Cubit<NewsState> {
   NewsCubit() : super(NewsInitialNewsState());
@@ -67,26 +67,31 @@ class NewsCubit extends Cubit<NewsState> {
 
   void getsports() {
     emit(NewsGetBusinessLoadingState());
-    DioHelper.getData(
-          url: "v2/top-headlines",
-          query: {
-            'country': 'us',
-            'category': 'sports',
-            'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
 
-            //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
-          },
-        )
-        .then((value) {
-          // print(value.data["articles"][0]['title']);
-          sports = value.data["articles"];
-          print(sports[0]['title']);
-          emit(NewsGetSportsSuccesState());
-        })
-        .catchError((error) {
-          print(error.toString());
-          emit(NewsGetSportsErrorState(error.toString()));
-        });
+    if (sports.isEmpty) {
+      DioHelper.getData(
+            url: "v2/top-headlines",
+            query: {
+              'country': 'us',
+              'category': 'sports',
+              'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
+
+              //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
+            },
+          )
+          .then((value) {
+            // print(value.data["articles"][0]['title']);
+            sports = value.data["articles"];
+            print(sports[0]['title']);
+            emit(NewsGetSportsSuccesState());
+          })
+          .catchError((error) {
+            print(error.toString());
+            emit(NewsGetSportsErrorState(error.toString()));
+          });
+    } else {
+      emit(NewsGetSportsSuccesState());
+    }
   }
 
   // Science
@@ -94,25 +99,29 @@ class NewsCubit extends Cubit<NewsState> {
 
   void getScience() {
     emit(NewsGetScienceLoadingState());
-    DioHelper.getData(
-          url: "v2/top-headlines",
-          query: {
-            'country': 'us',
-            'category': 'science',
-            'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
+    if (science.isEmpty) {
+      DioHelper.getData(
+            url: "v2/top-headlines",
+            query: {
+              'country': 'us',
+              'category': 'science',
+              'apiKey': '3b4f7eac4b7f41069dbfd1ef5d9873ad',
 
-            //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
-          },
-        )
-        .then((value) {
-          // print(value.data["articles"][0]['title']);
-          science = value.data["articles"];
-          print(science[0]['title']);
-          emit(NewsGetScienceSuccesState());
-        })
-        .catchError((error) {
-          print(error.toString());
-          emit(NewsGetScienceErrorState(error.toString()));
-        });
+              //GET https://newsapi.org/v2/everything?q=keyword&apiKey=3b4f7eac4b7f41069dbfd1ef5d9873ad
+            },
+          )
+          .then((value) {
+            // print(value.data["articles"][0]['title']);
+            science = value.data["articles"];
+            print(science[0]['title']);
+            emit(NewsGetScienceSuccesState());
+          })
+          .catchError((error) {
+            print(error.toString());
+            emit(NewsGetScienceErrorState(error.toString()));
+          });
+    } else {
+      emit(NewsGetScienceSuccesState());
+    }
   }
 }
