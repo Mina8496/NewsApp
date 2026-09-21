@@ -13,7 +13,7 @@ class SportsPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         List list = NewsCubit.get(context).sports;
-        return ArticleBulder(list:  list);
+        return ArticleBulder(list:  list, context: context,);
       },
     );
   }

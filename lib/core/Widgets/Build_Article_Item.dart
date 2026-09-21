@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/core/constant/appStyles.dart';
 
 class BuildArticleItem extends StatelessWidget {
   final dynamic articles;
-  const BuildArticleItem({super.key, required this.articles});
+  final BuildContext context;
+  const BuildArticleItem({super.key, required this.articles, required this.context});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class BuildArticleItem extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${articles['title']}',
-                      style: Appstyles.textStyle18,
+                      style: Theme.of(context).textTheme.bodySmall,
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                     ),

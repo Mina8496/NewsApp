@@ -14,7 +14,7 @@ class Businesspage extends StatelessWidget {
       },
       builder: (context, state) {
         List list = NewsCubit.get(context).business;
-        return  ArticleBulder(list:  list);
+        return  ArticleBulder(list:  list, context: context,);
       },
     );
   }

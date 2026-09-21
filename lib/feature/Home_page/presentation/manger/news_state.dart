@@ -30,3 +30,5 @@ class NewsGetScienceErrorState extends NewsState {
   final String error;
   NewsGetScienceErrorState(this.error);
 }
+
+class ChangeAppModeState extends NewsState {}

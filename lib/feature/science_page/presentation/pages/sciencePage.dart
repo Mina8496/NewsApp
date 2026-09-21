@@ -10,14 +10,11 @@ class Sciencepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewsCubit, NewsState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         List list = NewsCubit.get(context).science;
-        return  ArticleBulder(list:  list);
+        return ArticleBulder(list: list, context: context);
       },
     );
   }
 }
-
-

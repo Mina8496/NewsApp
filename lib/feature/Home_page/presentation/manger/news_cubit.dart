@@ -28,6 +28,12 @@ class NewsCubit extends Cubit<NewsState> {
     SettingsPage(),
   ];
 
+  bool isDark = false;
+  void changeAppMode() {
+    isDark = !isDark;
+    emit(ChangeAppModeState());
+  }
+
   void changeBottomNavBar(int index) {
     currentIndex = index;
     if (index == 1) getsports();

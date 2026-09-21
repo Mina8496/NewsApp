@@ -8,34 +8,36 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NewsCubit()..getBusiness(),
-      child: BlocConsumer<NewsCubit, NewsState>(
-        listener: (context, state) {
-        },
-        builder: (context, state) {
-          var cubit = NewsCubit.get(context);
+    return BlocConsumer<NewsCubit, NewsState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = NewsCubit.get(context);
 
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("News App"),
-              actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: cubit.currentIndex,
-              items: cubit.bottomItems,
-              onTap: (value) => cubit.changeBottomNavBar(value),
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-               
-              },
-              child: Icon(Icons.add),
-            ),
-            body: cubit.screens[cubit.currentIndex],
-          );
-        },
-      ),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("News App"),
+            actions: [
+              IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+              IconButton(
+                onPressed: () {
+                  cubit.changeAppMode();
+                },
+                icon: Icon(Icons.brightness_4_outlined),
+              ),
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: cubit.currentIndex,
+            items: cubit.bottomItems,
+            onTap: (value) => cubit.changeBottomNavBar(value),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
+          body: cubit.screens[cubit.currentIndex],
+        );
+      },
     );
   }
 }
