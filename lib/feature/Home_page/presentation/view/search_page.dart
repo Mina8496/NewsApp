@@ -38,7 +38,11 @@ class SearchPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ArticleBulder(list: list, context: context),
+                child: ArticleBulder(
+                  list: list,
+                  context: context,
+                  isSearch: true,
+                ),
               ),
             ],
           ),

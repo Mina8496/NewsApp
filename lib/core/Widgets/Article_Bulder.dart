@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/Widgets/Build_Article_Item.dart';
 
 class ArticleBulder extends StatelessWidget {
-  const ArticleBulder({super.key, required this.list, required this.context});
+  const ArticleBulder({
+    super.key,
+    required this.list,
+    required this.context,
+    this.isSearch = false,
+  });
 
+  final bool isSearch;
   final List<dynamic> list;
   final BuildContext context;
 
@@ -19,7 +25,8 @@ class ArticleBulder extends StatelessWidget {
         separatorBuilder: (context, index) => const Divider(height: 1),
         itemCount: list.length,
       ),
-      fallback: (context) => Center(child: CircularProgressIndicator()),
+      fallback: (context) =>
+          isSearch ? Container() : Center(child: CircularProgressIndicator()),
     );
   }
 }
