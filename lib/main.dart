@@ -22,13 +22,17 @@ class MyApp extends StatelessWidget {
   final bool isDark;
   const MyApp({super.key, required this.isDark});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewsCubit()
-        ..getBusiness()
-        ..changeAppMode(fromShared: isDark),
+      create: (context) {
+        final cubit = NewsCubit();
+
+        cubit.getBusiness();
+        cubit.changeAppMode(fromShared: isDark);
+
+        return cubit;
+      },
       child: BlocConsumer<NewsCubit, NewsState>(
         listener: (context, state) {},
         builder: (context, state) {
