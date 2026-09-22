@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/network/local/cache_helper.dart';
 import 'package:news_app/core/network/remote/dio_helper.dart';
 import 'package:news_app/feature/Business_page/presentation/view/BusinessPage.dart';
-import 'package:news_app/feature/Home_page/presentation/manger/news_state.dart';
+import 'package:news_app/core/manger/news_state.dart';
 import 'package:news_app/feature/science_page/presentation/pages/sciencePage.dart';
 import 'package:news_app/feature/settings_page/presentation/pages/settings_page.dart';
 import 'package:news_app/feature/sports_page/presentation/view/sports_page.dart';
