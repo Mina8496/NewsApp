@@ -31,10 +31,6 @@ class HomePage extends StatelessWidget {
             items: cubit.bottomItems,
             onTap: (value) => cubit.changeBottomNavBar(value),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            child: Icon(Icons.add),
-          ),
           body: cubit.screens[cubit.currentIndex],
         );
       },

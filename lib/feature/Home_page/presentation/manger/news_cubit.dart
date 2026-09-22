@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/core/network/local/cache_helper.dart';
 import 'package:news_app/core/network/remote/dio_helper.dart';
 import 'package:news_app/feature/Business_page/presentation/view/BusinessPage.dart';
 import 'package:news_app/feature/Home_page/presentation/manger/news_state.dart';
@@ -29,9 +30,15 @@ class NewsCubit extends Cubit<NewsState> {
   ];
 
   bool isDark = false;
-  void changeAppMode() {
-    isDark = !isDark;
-    emit(ChangeAppModeState());
+  void changeAppMode({bool? fromShared}) {
+    if (fromShared != null) {
+      isDark = fromShared;
+      emit(ChangeAppModeState());
+    } else {
+      isDark = !isDark;
+      CacheHelper.putBoolen(key: 'isDark', value: isDark).then((value) {});
+      emit(ChangeAppModeState());
+    }
   }
 
   void changeBottomNavBar(int index) {
