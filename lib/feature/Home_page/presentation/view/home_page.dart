@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/feature/Home_page/presentation/manger/news_cubit.dart';
-import 'package:news_app/feature/Home_page/presentation/manger/news_state.dart';
+import 'package:news_app/core/routes/app_navigator.dart';
+import 'package:news_app/core/manger/news_cubit.dart';
+import 'package:news_app/core/manger/news_state.dart';
+import 'package:news_app/feature/Home_page/presentation/view/search_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +19,12 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             title: Text("News App"),
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+              IconButton(
+                onPressed: () {
+                  AppNavigator.push(context, SearchPage());
+                },
+                icon: Icon(Icons.search),
+              ),
               IconButton(
                 onPressed: () {
                   cubit.changeAppMode();
